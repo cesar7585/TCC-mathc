@@ -1,13 +1,6 @@
 <?php
 session_start();
-include('includes/header.php');
 include('includes/db.php');
-
-if (!isset($_SESSION['usuario_id'])) {
-    header("Location: login.php");
-    exit();
-}
-
 $usuario_id = $_SESSION['usuario_id'];
 
 // Buscando os interesses do usuário

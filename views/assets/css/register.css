@@ -1,0 +1,166 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F9F5FB; /* Cor clara suave de fundo (roxo claro) */
+    color: #4B2F6C; /* Texto em roxo escuro e elegante */
+    line-height: 1.6;
+    padding: 0px 0px;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #6A4C91; /* Roxo profundo e sofisticado */
+    color: #EDE1F5; /* Cor clara suave para o texto */
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+header a {
+    color: #EDE1F5; /* Cor clara */
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+header a:hover {
+    color: #C0A1D9; /* Roxo mais claro no hover */
+    text-decoration: underline;
+}
+
+/* Container principal */
+.container {
+    max-width: 960px;
+    margin: 60px auto;
+    text-align: center;
+    background-color: #FFFFFF; /* Fundo branco para destacar o conteúdo */
+    padding: 50px 30px;
+    border-radius: 15px;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
+}
+
+.container h1 {
+    color: #6A4C91; /* Roxo profundo */
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 25px;
+}
+
+.container p {
+    font-size: 1.2rem;
+    color: #6A4C91; /* Roxo suave para o texto */
+    margin-bottom: 35px;
+    font-weight: 400;
+}
+
+.erro {
+    color: red;
+    margin-top: 20px;
+    font-size: 1.1rem;
+}
+
+.container input[type="email"],
+.container input[type="password"],
+.container input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #C0A1D9; /* Roxo suave nas bordas */
+    border-radius: 8px;
+    background-color: #F2E6FF; /* Fundo suave no campo de input */
+    font-size: 1rem;
+}
+
+.container input[type="email"]:focus,
+.container input[type="password"]:focus,
+.container input[type="text"]:focus {
+    border-color: #6A4C91; /* Roxo profundo ao focar no campo */
+    outline: none;
+}
+
+.container button {
+    width: 100%;
+    padding: 12px;
+    background-color: #6A4C91; /* Roxo profundo */
+    color: #EDE1F5; /* Texto claro */
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.container button:hover {
+    background-color: #C0A1D9; /* Roxo mais claro no hover */
+    transform: translateY(-2px);
+}
+
+.container button:active {
+    transform: translateY(0);
+}
+
+/* Rodapé */
+footer {
+    background-color: #6A4C91; /* Roxo profundo */
+    color: #EDE1F5; /* Texto claro */
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: #EDE1F5;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: #C0A1D9; /* Roxo mais claro no hover */
+}
+
+/* Estilos Responsivos */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .container h1 {
+        font-size: 2.2rem;
+    }
+
+    .container p {
+        font-size: 1rem;
+    }
+
+    .container a {
+        font-size: 1rem;
+        padding: 8px 20px;
+    }
+
+    .container input[type="email"],
+    .container input[type="password"],
+    .container input[type="text"] {
+        padding: 10px;
+        font-size: 1rem;
+    }
+
+    .container button {
+        font-size: 1rem;
+    }
+}

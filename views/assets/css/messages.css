@@ -1,0 +1,173 @@
+
+
+/* Resetando estilos básicos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fafafa;
+    /* Fundo claro */
+    color: #333;
+    /* Texto escuro */
+    line-height: 1.6;
+}
+
+/* Estilo do container das mensagens */
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Cabeçalho da página */
+h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilo das mensagens */
+ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 60px;
+    /* Espaço para a área de envio de mensagem */
+}
+
+/* Cada mensagem (balão) */
+li {
+    display: flex;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 15px;
+    align-items: center;
+    max-width: 75%;
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+li em {
+    font-size: 0.9rem;
+    color: #999;
+    margin-left: 5px;
+}
+
+/* Estilo do remetente */
+li strong {
+    font-weight: 600;
+    color: #3e3e3e;
+}
+
+/* Estilo do remetente quando é o usuário logado (mensagens enviadas pelo usuário) */
+li.sent {
+    background-color: #daf8cb;
+    /* Cor de fundo verde claro para mensagens enviadas */
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+/* Estilo do destinatário */
+li.received {
+    background-color: #f0f0f0;
+    /* Cor de fundo cinza claro para mensagens recebidas */
+    align-self: flex-start;
+}
+
+/* Formulário de envio de mensagem */
+form {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    padding: 15px;
+    background-color: #fff;
+    border-top: 1px solid #ddd;
+    box-shadow: 0 -3px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Campo de texto da mensagem */
+textarea {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    resize: none;
+    font-size: 1rem;
+    margin-right: 10px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+textarea:focus {
+    outline: none;
+    border-color: #6A4C91;
+    /* Cor do foco */
+}
+
+/* Botão de envio */
+button {
+    padding: 12px 20px;
+    background-color: #6A4C91;
+    /* Roxo do Instagram */
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #5a3c7f;
+    /* Cor de hover */
+}
+
+button:focus {
+    outline: none;
+}
+
+/* Estilo para o campo de seleção de destinatário */
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    background-color: #fafafa;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+select:focus {
+    outline: none;
+    border-color: #6A4C91;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        padding: 10px;
+    }
+
+    form {
+        padding: 10px;
+    }
+
+    textarea {
+        width: 70%;
+    }
+
+    button {
+        padding: 10px 15px;
+    }
+}
