@@ -6,7 +6,7 @@ session_start();
 include('./includes/db.php');
 
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: login.php");
+    header("Location: login.");
     exit();
 }
 

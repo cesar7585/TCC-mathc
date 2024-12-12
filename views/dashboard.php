@@ -40,7 +40,7 @@ $interesses = $stmt->fetchAll();
         <button type="submit">Adicionar</button>
     </form>
 
-    <a href="match.php">Ver Matches</a> | <a href="messages.php">Mensagens</a> | <a href="logout.php">Sair</a>
+    <a href="match">Ver Matches</a> | <a href="messages">Mensagens</a> | <a href="logout">Sair</a>
 </div>
 
-<?php include('includes/footer.php'); ?>
+<?php include('components/footer.php'); ?>

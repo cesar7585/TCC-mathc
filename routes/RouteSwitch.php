@@ -1,9 +1,10 @@
 <?php
-
+require_once __DIR__."/../controllers/UserController.php";
 abstract class RouteSwitch
 {
     protected function home()
     {
+        
         require __DIR__ . '/../views/home.php';
     }
 
@@ -16,9 +17,19 @@ abstract class RouteSwitch
     {
         require __DIR__ . '/pages/contact.html';
     }
-    protected function endereco(){
-        
+    protected function register(){
+
+        require __DIR__ . '/../views/register.php';
     }
+    protected function user_register_store(){
+
+    }
+    protected function login(){
+
+        require __DIR__. '/../views/login.php';
+    }
+   
+
     
     public function __call($name, $arguments)
     {
