@@ -1,27 +1,28 @@
 <?php
-  
-$servername = 'localhost';
-$username = 'root';
-$password = '';
-$dbname = 'busines_match_system';
+class db {
+    protected $pdo;
 
-try {
-    // Cria uma instância PDO
-    $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    public function __construct() {
+        $servername = 'localhost';
+        $username = 'root';
+        $password = '';
+        $dbname = 'CodeMatch';
 
-    // Prepara e executa a consulta SQL
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email");
-    $stmt->execute(['email' => $email]);
+        try {
+            // Establishing a PDO connection
+            $this->pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+            
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        } catch (PDOException $e) {
+            // Handle connection errors
+            die("Connection failed: " . $e->getMessage());
+        }
+    }
 
-    // ... resto do seu código
+    // A method to get the PDO instance
+    public function getConnection() {
 
-} catch(PDOException $e) {
-    echo "Erro: " . $e->getMessage();
+        return $this->pdo;
+    }
 }
-?>  
-
-
-
-
-
+?>

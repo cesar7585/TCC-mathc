@@ -10,7 +10,8 @@ $interessesUsuario = $stmt->fetchAll();
 
 // Buscando usuários com interesses semelhantes
 $matches = [];
-foreach ($interessesUsuario as $interesse) {
+foreach ($interessesUsuario as $interesse) 
+{
     $stmt = $pdo->prepare("SELECT * FROM users 
                           WHERE id != :id 
                           AND id IN (SELECT user_id FROM interests WHERE interesse = :interesse)");

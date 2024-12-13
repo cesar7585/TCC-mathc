@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -22,7 +24,9 @@
         <a href="register">Crie sua conta</a>
     </div>
     <!-- Rodapé -->
-    <?php include 'components/footer.php'?>
+    <footer>
+        <p>&copy; 2024 CodeMatch. Todos os direitos reservados.</p>
+</footer>
 
 
 </body>

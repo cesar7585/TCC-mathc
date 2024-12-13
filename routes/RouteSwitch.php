@@ -1,21 +1,19 @@
 <?php
+
 require_once __DIR__."/../controllers/UserController.php";
+// require_once __DIR__."/../controllers/Autenticacao.php";
 abstract class RouteSwitch
 {
     protected function home()
     {
-        
+        session_start();
+        $_SESSION['name']= 'henderson';
+
+        //var_dump($_SESSION['name']);
+        // Autenticacao::logar(1,'henderson','henderson@gmail.com');
+
         require __DIR__ . '/../views/home.php';
-    }
-
-    protected function messages()
-    {
-        require __DIR__ . '/../views/messages.php';
-    }
-
-    protected function contact()
-    {
-        require __DIR__ . '/pages/contact.html';
+        // var_dump($_SESSION['usuarioAutenticado']);
     }
     protected function register(){
 
@@ -28,15 +26,41 @@ abstract class RouteSwitch
 
         require __DIR__. '/../views/login.php';
     }
-   
+    protected function cadastrar_usuario(){
+        // Certifique-se de chamar os métodos corretamente com os parâmetros necessários
+        $user = new UserController();
+        // Cadastro
+        $response = $user->cadastrar($_POST);
+        echo $response;
+    }
 
+    protected function formulario(){
+
+        require __DIR__.'/../views/formulariopj.php';
+    }
+    protected function mostrarpj(){
+        require __DIR__.'/../views/mostrarpj.php';
+
+    }
+
+    protected function pagina_sobre(){
+        require __DIR__.'/../views/pagina_sobre.php';
+
+    }
     
+
+
+
     public function __call($name, $arguments)
     {
-        http_response_code(404);
-        // PAGINA ERRO 404
-        echo $_SERVER['REQUEST_URI'];
-        //require __DIR__ . '/../views/error404.php';
+        // Definir o código de resposta HTTP para 404
+http_response_code(404);
 
+// Exibir a URI solicitada, caso queira debugar
+echo $_SERVER['REQUEST_URI'];
+
+// Incluir uma página de erro personalizada
+// require __DIR__ . '/../views/error404.php';
+   
     }
 }
