@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__.'/../routes/Router.php';
-include 'controller/UserController.php';
+include 'controllers/Autenticacao.php';
 
 class Usercontroller
 
