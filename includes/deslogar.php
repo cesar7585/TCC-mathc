@@ -1,9 +1,9 @@
 <?php
 // Conexão com o banco de dados (ajuste as informações)
-$servername = 'localhost';
-$username = 'root';
-$password = "";
-$dbname = 'busines_match_system';
+$servername = 'srv950.hstgr.io,';
+$username = 'u895973460_tcc';
+$password = "tcc-Cesar-Yasmin123";
+$dbname = 'u895973460_Match,';
 
 try {
     $pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);

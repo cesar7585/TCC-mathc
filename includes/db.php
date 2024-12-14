@@ -3,10 +3,10 @@ class db {
     protected $pdo;
 
     public function __construct() {
-        $servername = 'localhost';
-        $username = 'root';
-        $password = '';
-        $dbname = 'CodeMatch';
+        $servername = 'srv950.hstgr.io';
+        $username = 'u895973460_tcc';
+        $password = 'tcc-Cesar-Yasmin123';
+        $dbname = 'u895973460_Match';
 
         try {
             // Establishing a PDO connection

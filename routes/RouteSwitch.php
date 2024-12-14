@@ -38,8 +38,8 @@ abstract class RouteSwitch
 
         require __DIR__.'/../views/formulariopj.php';
     }
-    protected function mostrarpj(){
-        require __DIR__.'/../views/mostrarpj.php';
+    protected function projetos(){
+        require __DIR__.'/../views/projetos.php';
 
     }
 

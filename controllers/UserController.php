@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__.'/../routes/Router.php';
-include 'controllers/Autenticacao.php';
+require_once __DIR__. '/../controllers/Autenticacao.php';
 
 class Usercontroller
 
@@ -54,12 +54,8 @@ class Usercontroller
                 $stmt->execute([$dados['nome'], $dados['email']]);
 
                 return json_encode(["message" => "Usuario cadastrado com sucesso"], JSON_PRETTY_PRINT);
+                Autenticao::logar($dados['id'],$dados['name'],$dados['email']);
             }
-            Autenticao::logar($dados['id'],$dados['name'],$dados['email']);
-
-     
-
-          
         } catch (PDOException $e) {
             // Log de erro e retorno
             error_log("Erro ao cadastrar usuário: " . $e->getMessage());
