@@ -12,17 +12,9 @@
 
 <body>
     <!-- Cabeçalho -->
-    <header>
-        <h1>CodeMatch</h1>
-        <nav>
-            <a href="home">Início</a>
-            <a href="pagina_sobre">Sobre</a>
-            <a href="about">Projetos</a>
-            <a href="pj">Match</a>
-            <a href="logout">Deslogar</a>
-            <a href="login">Logar</a>
-        </nav>
-    </header>
+    <?php 
+        include_once __DIR__."/components/header.php";
+    ?>
 
     <!-- Conteúdo Principal -->
     <div class="container">
