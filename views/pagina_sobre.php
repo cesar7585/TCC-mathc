@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="views/assets/css/pagina_sobre.css">
-    <title>Sobre - CodeMatch</title>
+    <title>CodeMatch</title>
     <!-- Estilos CSS -->
 
 </head>

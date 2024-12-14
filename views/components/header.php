@@ -3,7 +3,7 @@
         <nav>
             <a href="home">Início</a>
             <a href="pagina_sobre">Sobre</a>
-            <a href="about">Projetos</a>
+            <a href="mostrarpj">Projetos</a>
             <a href="mostrarpj">Match</a>
             <a href="logout">Deslogar</a>
             <a href="login">Logar</a>

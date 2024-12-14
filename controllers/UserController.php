@@ -1,7 +1,9 @@
 <?php
 require_once __DIR__.'/../routes/Router.php';
+include 'controller/UserController.php';
 
 class Usercontroller
+
 {
     private $pdo;
     public function __construct()
@@ -38,8 +40,8 @@ class Usercontroller
             // Verifica se o email ja está cadastrado
             $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = ?");
             $stmt->execute([$dados['email']]);
-            var_dump($stmt);
-            echo $stmt;
+            // var_dump($stmt);
+            // echo $stmt;
             
             if ($stmt->fetch()) {
                 $error = "Email já cadastrado!";

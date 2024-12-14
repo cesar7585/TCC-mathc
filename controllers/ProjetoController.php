@@ -1,14 +1,13 @@
 <?php
 require_once __DIR__ . '/../routes/Router.php';
 
-class Usercontroller
+class ProjetoController
 {
     private $pdo;
     public function __construct()
     {
         require_once __DIR__ . '/../includes/db.php';
         $db = new Db();
-
         $this->pdo = $db->getConnection();
     }
 
@@ -56,7 +55,7 @@ class Usercontroller
             if (empty($projeto)) {
                 return json_encode(["message" => ""], JSON_PRETTY_PRINT);
             }
-
+            
             return json_encode($projeto, JSON_PRETTY_PRINT);
         } catch (PDOException $e) {
             error_log("Erro ao buscar projeto: " . $e->getMessage());
