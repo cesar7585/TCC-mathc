@@ -44,9 +44,10 @@ abstract class RouteSwitch
     }
 
     protected function pagina_sobre(){
-        require __DIR__.'/../views/pagina_sobre.php';
+        require __DIR__.'/../views/sobre.php';
 
     }
+
     
 
 
@@ -54,13 +55,13 @@ abstract class RouteSwitch
     public function __call($name, $arguments)
     {
         // Definir o código de resposta HTTP para 404
-http_response_code(404);
+        http_response_code(404);
 
-// Exibir a URI solicitada, caso queira debugar
-echo $_SERVER['REQUEST_URI'];
+        // Exibir a URI solicitada, caso queira debugar
+        echo "Não existe essa rota :". $_SERVER['REQUEST_URI'].", seu maluco!";
 
-// Incluir uma página de erro personalizada
-// require __DIR__ . '/../views/error404.php';
+        // Incluir uma página de erro personalizada
+        // require __DIR__ . '/../views/error404.php';
    
     }
 }
