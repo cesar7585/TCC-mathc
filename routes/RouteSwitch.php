@@ -1,6 +1,8 @@
 <?php
 
 require_once __DIR__."/../controllers/UserController.php";
+require_once __DIR__."/../controllers/ProjetoController.php";
+require_once __DIR__."/../controllers/Autenticacao.php";
 // require_once __DIR__."/../controllers/Autenticacao.php";
 abstract class RouteSwitch
 {
@@ -13,7 +15,7 @@ abstract class RouteSwitch
         // Autenticacao::logar(1,'henderson','henderson@gmail.com');
 
         require __DIR__ . '/../views/home.php';
-        // var_dump($_SESSION['usuarioAutenticado']);
+        // var_dump($_SESSION['userAutenticado']);
     }
     protected function register(){
 
@@ -26,17 +28,33 @@ abstract class RouteSwitch
 
         require __DIR__. '/../views/login.php';
     }
-    protected function cadastrar_usuario(){
+    protected function cadastrar_user(){
         // Certifique-se de chamar os métodos corretamente com os parâmetros necessários
         $user = new UserController();
         // Cadastro
         $response = $user->cadastrar($_POST);
         echo $response;
+        
     }
 
     protected function formulario(){
 
-        require __DIR__.'/../views/formulariopj.php';
+        require __DIR__.'/../views/formulario.php';
+    }
+    protected function Cadastrar_projeto(){
+        session_start();
+        var_dump(session_status());
+        /*
+        if(session_status()){
+            
+            $user= new ProjetoController();
+
+            $response=$user->cadastrar($_POST);
+            echo $response;
+        
+        }
+            */
+
     }
     protected function projetos(){
         require __DIR__.'/../views/projetos.php';
@@ -46,6 +64,15 @@ abstract class RouteSwitch
     protected function pagina_sobre(){
         require __DIR__.'/../views/sobre.php';
 
+    }
+    protected function outros_projetos(){
+        require __DIR__.'/../views/match.php';
+    }
+    protected function logar(){
+        
+        $auth = new Autenticacao();
+        
+        $auth->logar($_POST['email'],$_POST['senha']);
     }
 
     

@@ -1,21 +1,22 @@
 <?php
-require_once __DIR__.'/../routes/Router.php';
-require_once __DIR__. '/../controllers/Autenticacao.php';
 
-class Usercontroller
+require_once __DIR__ . '/../routes/Router.php';
+require_once __DIR__ . '/../controllers/Autenticacao.php';
 
+class UserController
 {
     private $pdo;
+
     public function __construct()
     {
         require_once __DIR__ . '/../includes/db.php';
         $db = new Db();
-        
         $this->pdo = $db->getConnection();
     }
-    
-    // exibe todos os usuarios
-    public function index() {
+
+    // Exibe todos os usuários
+    public function index()
+    {
         try {
             $stmt = $this->pdo->prepare("SELECT * FROM users");
             $stmt->execute();
@@ -31,44 +32,43 @@ class Usercontroller
             return json_encode(["error" => "Erro ao buscar usuários."], JSON_PRETTY_PRINT);
         }
     }
-    
-    // cadastra o usuario
+
+    // Cadastra o usuário
     public function cadastrar($dados)
     {
-        
         try {
-            // Verifica se o email ja está cadastrado
+            // Verifica se o email já está cadastrado
             $stmt = $this->pdo->prepare("SELECT * FROM users WHERE email = ?");
             $stmt->execute([$dados['email']]);
-            // var_dump($stmt);
-            // echo $stmt;
-            
+
             if ($stmt->fetch()) {
                 $error = "Email já cadastrado!";
-                include __DIR__.'/../views/register.php';
-                //return json_encode(["error" => "Email já cadastrado"], JSON_PRETTY_PRINT);
+                include __DIR__ . '/../views/register.php';
+                return;
             }
-            else{
-                // Insere o usuário no banco de dados
-                $stmt = $this->pdo->prepare("INSERT INTO users (name, email) VALUES (?, ?)");
-                $stmt->execute([$dados['nome'], $dados['email']]);
 
-                return json_encode(["message" => "Usuario cadastrado com sucesso"], JSON_PRETTY_PRINT);
-                Autenticao::logar($dados['id'],$dados['name'],$dados['email']);
-            }
+            // Insere o usuário no banco de dados
+            var_dump($dados);
+            $stmt = $this->pdo->prepare("INSERT INTO users (name, email, password, image_url) VALUES (?, ?, ?, ?");
+            $stmt->execute([$dados['name'], $dados['email'], password_hash($dados['password'],PASSWORD_DEFAULT), $dados['image_url']]);
+
+            // Login automático após cadastro
+            $lastId = $this->pdo->lastInsertId();
+            Autenticacao::logar($lastId, $dados['name'], $dados['email'], $dados['password'], $dados['image_url'], null);
+
+            return json_encode(["message" => "Usuário cadastrado com sucesso"], JSON_PRETTY_PRINT);
         } catch (PDOException $e) {
-            // Log de erro e retorno
             error_log("Erro ao cadastrar usuário: " . $e->getMessage());
-            return json_encode(["error" => "Erro ao cadastrar usuario.". $e->getMessage()], JSON_PRETTY_PRINT);
+            return json_encode(["error" => "Erro ao cadastrar usuário."], JSON_PRETTY_PRINT);
+            var_dump($dados);
         }
-
     }
 
     // Exibe um usuário pelo ID
     public function show($id)
     {
         try {
-            $stmt = $this->pdo->prepare("SELECT * FROM user WHERE id = ?");
+            $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id = ?");
             $stmt->execute([$id]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -83,26 +83,34 @@ class Usercontroller
         }
     }
 
-
-    // deleta o usuario
-    public function destroy($id) {
+    // Deleta o usuário
+    public function destroy($id)
+    {
         try {
-            // Verificar se o e-mail já está cadastrado
+            // Verifica se o usuário existe
             $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id = ?");
             $stmt->execute([$id]);
 
+            if (!$stmt->fetch()) {
+                return json_encode(["error" => "Usuário não encontrado."], JSON_PRETTY_PRINT);
+            }
+
+            // Deleta o usuário
+            $stmt = $this->pdo->prepare("DELETE FROM users WHERE id = ?");
+            $stmt->execute([$id]);
+
             return json_encode(["message" => "Usuário deletado com sucesso"], JSON_PRETTY_PRINT);
-    } catch (PDOException $e) {
-        // Log de erro e retorno
-        error_log("Erro ao deletar usuário: " . $e->getMessage());
-        return json_encode(["error" => "Erro ao deletar usuário."], JSON_PRETTY_PRINT);
-}
+        } catch (PDOException $e) {
+            error_log("Erro ao deletar usuário: " . $e->getMessage());
+            return json_encode(["error" => "Erro ao deletar usuário."], JSON_PRETTY_PRINT);
+        }
     }
+
     // Carrega a página para editar os dados do usuário
     public function edit($id)
     {
         try {
-            $stmt = $this->pdo->prepare("SELECT * FROM user WHERE id = ?");
+            $stmt = $this->pdo->prepare("SELECT * FROM users WHERE id = ?");
             $stmt->execute([$id]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -119,11 +127,11 @@ class Usercontroller
     }
 
     // Atualiza os dados do usuário
-    public function update($id, $name, $email)
+    public function update($id, $name, $email, $image_url)
     {
         try {
-            $stmt = $this->pdo->prepare("UPDATE user SET name = ?, email = ? WHERE id = ?");
-            $stmt->execute([$name, $email, $id]);
+            $stmt = $this->pdo->prepare("UPDATE users SET name = ?, email = ?, image_url = ? WHERE id = ?");
+            $stmt->execute([$name, $email, $image_url, $id]);
 
             return json_encode(["message" => "Usuário atualizado com sucesso."], JSON_PRETTY_PRINT);
         } catch (PDOException $e) {
@@ -131,18 +139,58 @@ class Usercontroller
             return json_encode(["error" => "Erro ao atualizar usuário."], JSON_PRETTY_PRINT);
         }
     }
+
+    // Atualiza os dados de contato
+    public function updateContacts($id, $whatsapp, $instagram)
+    {
+        try {
+            // Verifica se o usuário existe
+            $stmt = $this->pdo->prepare("SELECT * FROM contacts WHERE user_id = ?");
+            $stmt->execute([$id]);
+
+            if ($stmt->fetch()) {
+                // Atualiza os contatos existentes
+                $stmt = $this->pdo->prepare("UPDATE contacts SET whatsapp = ?, instagram = ? WHERE user_id = ?");
+                $stmt->execute([$whatsapp, $instagram, $id]);
+            } else {
+                // Insere novos contatos
+                $stmt = $this->pdo->prepare("INSERT INTO contacts (whatsapp, instagram, user_id) VALUES (?, ?, ?)");
+                $stmt->execute([$whatsapp, $instagram, $id]);
+            }
+
+            return json_encode(["message" => "Contatos atualizados com sucesso."], JSON_PRETTY_PRINT);
+        } catch (PDOException $e) {
+            error_log("Erro ao atualizar contatos: " . $e->getMessage());
+            return json_encode(["error" => "Erro ao atualizar contatos."], JSON_PRETTY_PRINT);
+        }
+    }
+
+    // Adiciona um novo projeto
+    public function addProject($userId, $title, $description, $languages, $framework = null)
+    {
+        try {
+            // Insere o novo projeto no banco
+            $stmt = $this->pdo->prepare("INSERT INTO projects (users_id, title, description, languages, framework) VALUES (?, ?, ?, ?, ?)");
+            $stmt->execute([$userId, $title, $description, $languages, $framework]);
+
+            return json_encode(["message" => "Projeto adicionado com sucesso."], JSON_PRETTY_PRINT);
+        } catch (PDOException $e) {
+            error_log("Erro ao adicionar projeto: " . $e->getMessage());
+            return json_encode(["error" => "Erro ao adicionar projeto."], JSON_PRETTY_PRINT);
+        }
+    }
+
+    // Atualiza os dados de um projeto
+    public function updateProject($projectId, $title, $description, $languages, $framework = null)
+    {
+        try {
+            $stmt = $this->pdo->prepare("UPDATE projects SET title = ?, description = ?, languages = ?, framework = ? WHERE id = ?");
+            $stmt->execute([$title, $description, $languages, $framework, $projectId]);
+
+            return json_encode(["message" => "Projeto atualizado com sucesso."], JSON_PRETTY_PRINT);
+        } catch (PDOException $e) {
+            error_log("Erro ao atualizar projeto: " . $e->getMessage());
+            return json_encode(["error" => "Erro ao atualizar projeto."], JSON_PRETTY_PRINT);
+        }
+    }
 }
-
-/*
-// Deleção
-$response = $controller->destroy(1);
-echo $response;
-
-// Mostrar usuário
-$response = $controller->show(1);
-echo $response;
-
-// Atualizar usuário
-$response = $controller->update(1, "Novo Nome", "novoemail@example.com");
-echo $response;
-*/

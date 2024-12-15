@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CodeMatch</title>
     <!-- Estilos CSS -->
-    <link rel="stylesheet" href="views/assets/css/home.css">
+    <link rel="stylesheet" href="/../views/assets/css/home.css">
+
 </head>
 
 <body>

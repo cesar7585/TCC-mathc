@@ -11,7 +11,7 @@ try {
     $userId = $_GET['id']; 
 
     // Preparar a consulta SQL
-    $stmt = $pdo->prepare("DELETE FROM usuarios WHERE id = :id");
+    $stmt = $pdo->prepare("DELETE FROM users WHERE id = :id");
 
     // Executar a consulta
     $stmt->execute(['id' => $userId]);

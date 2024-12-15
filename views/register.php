@@ -16,9 +16,9 @@
     <div class="container">
         <h1>Cadastro</h1>
 <!-- localhost:8000/register -->
-        <form method="POST" action="/cadastrar_usuario">
-            <label for="nome">Nome:</label>
-            <input type="text" name="nome" required>
+        <form method="POST" action="/cadastrar_User">
+            <label for="name">Nome:</label>
+            <input type="text" name="name" required>
 
             <label for="email">E-mail:</label>
             <input type="email" name="email" required>
@@ -27,11 +27,18 @@
                         echo $error;
                     } 
             ?>
-            <label for="senha">Senha:</label>
-            <input type="password" name="senha" required>
+            <label for="password">Senha:</label>
+            <input type="password" name="password" required>
 
             <label for="numero">telefone</label>
             <input type="number" name="numero" required>
+                </br>
+
+            
+    <input type="file" id="file-input" accept="image/*">
+    <label for="file-input">Selecione sua foto de perfil</label>
+    <img id="" src="" alt="">
+
 
             <button type="submit">Cadastrar</button>
         </form>

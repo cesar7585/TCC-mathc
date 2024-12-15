@@ -1,35 +1,25 @@
 <?php
-session_start();
-include('includes/db.php');
-$usuario_id = $_SESSION['usuario_id'];
+require_once __DIR__.'/../controllers/matchControler.php';
 
-// Buscando os interesses do usuário
-$stmt = $pdo->prepare("SELECT * FROM interests WHERE user_id = :id");
-$stmt->execute(['id' => $usuario_id]);
-$interessesUsuario = $stmt->fetchAll();
+$projects = $_COOKIE['allProjects'];
 
-// Buscando usuários com interesses semelhantes
-$matches = [];
-foreach ($interessesUsuario as $interesse) 
-{
-    $stmt = $pdo->prepare("SELECT * FROM users 
-                          WHERE id != :id 
-                          AND id IN (SELECT user_id FROM interests WHERE interesse = :interesse)");
-    $stmt->execute(['id' => $usuario_id, 'interesse' => $interesse['interesse']]);
-    $matches = array_merge($matches, $stmt->fetchAll());
+foreach ($projects as $project){
+    $project['titl7e'];
+
 }
 ?>
 
 <div class="container">
-    <h1>Seus Matches</h1>
+    <h1>Outros projetos</h1>
+    <a href="formulario">Criar projeto</a>
     <?php if (count($matches) > 0): ?>
         <ul>
             <?php foreach ($matches as $match): ?>
-                <li><?php echo htmlspecialchars($match['nome']); ?> - <?php echo htmlspecialchars($match['email']); ?></li>
+                <li><?php echo htmlspecialchars($match['name']); ?> - <?php echo htmlspecialchars($match['email']); ?></li>
             <?php endforeach; ?>
         </ul>
     <?php else: ?>
-        <p>Não há matches disponíveis no momento.</p>
+        <p>Não há rpojetos disponíveis no momento.</p>
     <?php endif; ?>
 </div>
 

@@ -1,31 +1,31 @@
 <?php
 session_start();
-include('includes/header.php');
+include('components/header.php');
 include('includes/db.php');
 
-if (!isset($_SESSION['usuario_id'])) {
+if (!isset($_SESSION['users_idd'])) {
     header("Location: login.php");
     exit();
 }
 
-$usuario_id = $_SESSION['usuario_id'];
+$users_id = $_SESSION['users_id'];
 
 // Pegando os dados do usuário
 $stmt = $pdo->prepare("SELECT * FROM users WHERE id = :id");
-$stmt->execute(['id' => $usuario_id]);
-$usuario = $stmt->fetch();
+$stmt->execute(['id' => $users_id]);
+$users_id = $stmt->fetch();
 
 // Pegando os interesses do usuário
 $stmt = $pdo->prepare("SELECT * FROM interests WHERE user_id = :id");
-$stmt->execute(['id' => $usuario_id]);
+$stmt->execute(['id' => $users_id]);
 $interesses = $stmt->fetchAll();
 ?>
 
 <div class="container">
-    <h1>Bem-vindo, <?php echo htmlspecialchars($usuario['nome']); ?>!</h1>
+    <h1>Bem-vindo, <?php echo htmlspecialchars($user['name']); ?>!</h1>
     
     <h2>Seu Perfil</h2>
-    <p><strong>Email:</strong> <?php echo htmlspecialchars($usuario['email']); ?></p>
+    <p><strong>Email:</strong> <?php echo htmlspecialchars($user['email']); ?></p>
 
     <h2>Seus Interesses</h2>
     <ul>

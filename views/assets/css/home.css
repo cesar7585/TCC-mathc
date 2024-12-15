@@ -1,135 +1,124 @@
-/* Resetando estilos básicos */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Corpo da página */
+/* Estilo geral do corpo */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #F9F5FB;
-    /* Cor clara suave de fundo (roxo claro) */
-    color: #4B2F6C;
-    /* Texto em roxo escuro e elegante */
-    line-height: 1.6;
-    padding: 0px 0px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #C6CAEB; /* Cor de fundo suave */
+    margin: 0;
+    padding: 20px;
+    color: #353D60; /* Cor do texto principal */
 }
 
-/* Cabeçalho */
+/* Estilo do cabeçalho */
 header {
-    background-color: #6A4C91;
-    /* Roxo profundo e sofisticado */
-    color: #EDE1F5;
-    /* Cor clara suave para o texto */
-    padding: 20px 0;
+    background-color: #515A82; /* Cor de fundo escura */
+    color: #F9F5FB; /* Cor clara para o texto */
+    padding: 30px;
     text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra suave */
 }
 
 header h1 {
+    font-size: 2.8rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Estilo dos títulos principais */
+h1 {
+    color: #353D60; /* Cor do título */
+    border-bottom: 4px solid #737BA5; /* Linha de separação sutil */
+    padding-bottom: 15px;
     font-size: 2.5rem;
-    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
 }
-/* salvre */
-header a {
-    color: #EDE1F5;
-    /* Cor clara */
+
+/* Estilo das listas */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background: #9AA0C8; /* Cor suave para os itens da lista */
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(79, 59, 74, 0.1); /* Sombra suave */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+li:hover {
+    background-color: #737BA5; /* Cor do item no hover */
+    transform: translateY(-8px); /* Efeito de elevação */
+}
+
+/* Estilo de link */
+a {
+    display: inline-block;
+    padding: 12px 18px;
+    background-color: #737BA5;
+    color: #F9F5FB;
     text-decoration: none;
-    margin: 0 15px;
+    border-radius: 8px;
     font-weight: 600;
-    font-size: 1.1rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 20px;
 }
 
-header a:hover {
-    color: #C0A1D9;
-    /* Roxo mais claro no hover */
-    text-decoration: underline;
+a:hover {
+    background-color: #353D60;
+    transform: translateY(-4px); /* Efeito de elevação no hover */
 }
 
-/* Container principal */
-.container {
-    max-width: 960px;
-    margin: 60px auto;
+/* Estilo do botão "Criar projeto" */
+.button {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 18px;
+    color: #F9F5FB;
+    background-color: #515A82;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 40px;
     text-align: center;
-    background-color: #FFFFFF;
-    /* Fundo branco para destacar o conteúdo */
-    padding: 50px 30px;
-    border-radius: 15px;
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
 }
 
-.container h1 {
-    color: #6A4C91;
-    /* Roxo profundo */
-    font-size: 3.5rem;
-    font-weight: bold;
-    margin-bottom: 25px;
+.button:hover {
+    background-color: #353D60;
+    transform: translateY(-4px);
 }
 
-.container p {
-    font-size: 1.2rem;
-    color: #6A4C91;
-    /* Roxo suave para o texto */
-    margin-bottom: 35px;
-    font-weight: 400;
-}
-
-.container a {
-    text-decoration: none;
-    color: #6A4C91;
-    /* Roxo suave */
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin: 0 15px;
-    padding: 10px 25px;
-    background-color: #C0A1D9;
-    /* Roxo suave de fundo */
-    border-radius: 50px;
-    border: 2px solid #6A4C91;
-    transition: all 0.3s ease-in-out;
-}
-
-.container a:hover {
-    background-color: #6A4C91;
-    color: #EDE1F5;
-    transform: translateY(-2px);
-}
-
-.container a:active {
-    transform: translateY(0);
-}
-
-/* Rodapé */
+/* Estilo do rodapé */
 footer {
-    background-color: #6A4C91;
-    /* Roxo profundo */
-    color: #EDE1F5;
-    /* Texto claro */
+    background-color: #515A82;
+    color: #F9F5FB;
     text-align: center;
     padding: 20px 0;
     position: relative;
     bottom: 0;
     width: 100%;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 footer a {
-    color: #EDE1F5;
+    color: #F9F5FB;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
 }
 
 footer a:hover {
-    color: #C0A1D9;
-    /* Roxo mais claro no hover */
+    color: #C0A1D9; /* Cor de destaque no hover */
 }
 
 /* Estilos Responsivos */
 @media (max-width: 768px) {
     header h1 {
-        font-size: 2rem;
+        font-size: 2.2rem;
     }
 
     .container h1 {
@@ -142,6 +131,14 @@ footer a:hover {
 
     .container a {
         font-size: 1rem;
-        padding: 8px 20px;
+        padding: 10px 25px;
+    }
+
+    footer {
+        padding: 20px 0;
+    }
+
+    .button {
+        width: 100%; /* Botão ocupa toda a largura em dispositivos pequenos */
     }
 }

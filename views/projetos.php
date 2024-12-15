@@ -5,7 +5,8 @@ require_once 'controllers/ProjetoController.php';
 // Instancia o controller
 $projetoController = new ProjetoController();
 
-
+// Inclui o header
+include 'views/components/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -21,23 +22,24 @@ $projetoController = new ProjetoController();
     <ul>
        <?php 
        // Verifica se há projetos do usuário
-       if (!empty($projetos_usuario)): 
-           foreach ($projetos_usuario as $projeto): ?>               
-               <li><?php echo htmlspecialchars($projeto['name']); ?></li>
-           <?php endforeach; 
-       else: ?>
-           <li>Nenhum projeto encontrado.</li>
-       <?php endif; ?>
+       if (!empty($projetos_user)){ 
+           foreach ($projetos_user as $projeto):               
+               echo htmlspecialchars($projeto['name']); 
+           endforeach; 
+       } else {
+           echo "Nenhum projeto encontrado."; // Corrigido o fechamento do echo
+       }
+       ?>
     </ul>
 
-    <h1>Seus Projetos</h1>
+    <h1>Projetos de outros usuários</h1>
     <ul>
         <?php if (!empty($projetos_terceiros)): ?>
             <?php foreach ($projetos_terceiros as $projeto): ?>
                 <li><?php echo htmlspecialchars($projeto['name']); ?></li>
             <?php endforeach; ?>
         <?php else: ?>
-            <li>Nenhum projeto de terceiros encontrado.</li>
+            <li>Nenhum projeto encontrado.</li>
         <?php endif; ?>
     </ul>
 
