@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    
+
     <form method="post" action="/cadastrar_Projeto" >
 
         <label for="text" name="title">titulo do projeto</label>

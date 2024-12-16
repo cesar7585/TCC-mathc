@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../routes/Router.php';
 require_once __DIR__ . '/../controllers/ProjetoController.php';
+require_once __DIR__.'/../controllers/Autenticacao.php';
 
 class ProjetoController
 {
@@ -14,18 +15,14 @@ class ProjetoController
     }
 
     // Exibe todos os projetos
-    public function index()
+    public function todosProjetos()
     {
         try {
-            $stmt = $this->pdo->prepare("SELECT * FROM projects");
+            $stmt = $this->pdo->prepare("SELECT * FROM projects WHERE users_id != ".$_SESSION['auth']['id']);
             $stmt->execute();
             $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            if (empty($projects)) {
-                return json_encode(["message" => "Nenhum projeto encontrado."], JSON_PRETTY_PRINT);
-            }
-
-            $_COOKIE['allProjects']=$projects;
+            $projects=$_COOKIE['todosProjetos'];
             header('outros_projetos');
             return json_encode($projects, JSON_PRETTY_PRINT);
         } catch (PDOException $e) {
@@ -33,11 +30,25 @@ class ProjetoController
             return json_encode(["error" => "Erro ao buscar projetos."], JSON_PRETTY_PRINT);
         }
     }
+    public function meusProjetos(){
+
+        $query= $this->pdo->query("SELECT * FROM projects WHERE users_id =".$_SESSION['auth']['id']);
+        //$query->execute();
+       
+        $projects = $query->fetchAll(PDO::FETCH_ASSOC);
+
+        
+        $_SESSION['meusProjetos'] = $projects;
+
+        (new Router())->redirecionar('meus_projetos');
+        
+        //header('/home');
+    }
 
     // Cadastra um projeto
     public function cadastrar($dados)
     { 
-        session_start();
+        
         try {
             
             

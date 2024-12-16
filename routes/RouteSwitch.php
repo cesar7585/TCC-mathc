@@ -43,8 +43,7 @@ abstract class RouteSwitch
     }
     protected function Cadastrar_projeto(){
         session_start();
-        var_dump(session_status());
-        /*
+        
         if(session_status()){
             
             $user= new ProjetoController();
@@ -53,11 +52,22 @@ abstract class RouteSwitch
             echo $response;
         
         }
-            */
+        
 
     }
-    protected function projetos(){
-        require __DIR__.'/../views/projetos.php';
+    protected function meus_projetos(){
+        
+        if(session_status() != 2){
+            session_start();
+        }
+       
+        if(!isset($_SESSION['auth'])){
+
+            header('login');
+        }
+
+        $project = (new ProjetoController())->meusProjetos();
+        //require __DIR__.'/../views/meusprojetos.php';
 
     }
 

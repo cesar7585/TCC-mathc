@@ -5,7 +5,7 @@ require_once __DIR__ . '/RouteSwitch.php';
 class Router extends RouteSwitch
 {
    
-    public function redirecionar($nomeRota){
+    public function  redirecionar($nomeRota){
         $this->$nomeRota();
     }
     public function run(string $requestUri)
