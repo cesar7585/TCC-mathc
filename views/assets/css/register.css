@@ -9,15 +9,14 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #C6CAEB; /* Cor suave de fundo */
-    color: #1D243D; /* Texto em um tom escuro, para melhor leitura */
+    color: #1D243D; /* Cor de texto escura para contraste */
     line-height: 1.6;
-    padding: 0;
 }
 
 /* Cabeçalho */
 header {
-    background-color: #737BA5; 
-    color: #C6CAEB; 
+    background-color: #737BA5;
+    color: #C6CAEB;
     padding: 20px 0;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -30,11 +29,12 @@ header h1 {
 }
 
 header a {
-    color: #C6CAEB; 
+    color: #C6CAEB;
     text-decoration: none;
     margin: 0 15px;
     font-weight: 600;
     font-size: 1.1rem;
+    transition: color 0.3s ease;
 }
 
 header a:hover {
@@ -47,14 +47,14 @@ header a:hover {
     max-width: 960px;
     margin: 60px auto;
     text-align: center;
-    background-color: #FFFFFF; /* Fundo branco para destacar o conteúdo */
+    background-color: #FFFFFF; /* Fundo branco para destaque */
     padding: 50px 30px;
     border-radius: 15px;
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.1);
 }
 
 .container h1 {
-    color: #515A82; 
+    color: #515A82;
     font-size: 3.5rem;
     font-weight: bold;
     margin-bottom: 25px;
@@ -62,13 +62,13 @@ header a:hover {
 
 .container p {
     font-size: 1.2rem;
-    color: #515A82; 
+    color: #515A82;
     margin-bottom: 35px;
-    font-weight: 400;
 }
 
+/* Mensagem de erro */
 .erro {
-    color: #353D60; 
+    color: #353D60;
     margin-top: 20px;
     font-size: 1.1rem;
 }
@@ -80,17 +80,15 @@ header a:hover {
     width: 100%;
     padding: 12px;
     margin: 10px 0;
-    border: 2px solid #9AA0C8; 
+    border: 2px solid #9AA0C8;
     border-radius: 8px;
-    background-color: #E3E6F3; 
+    background-color: #E3E6F3;
     font-size: 1rem;
     transition: border-color 0.3s ease-in-out;
 }
 
-.container input[type="email"]:focus,
-.container input[type="password"]:focus,
-.container input[type="text"]:focus {
-    border-color: #515A82; 
+.container input:focus {
+    border-color: #515A82; /* Borda mais escura no foco */
     outline: none;
 }
 
@@ -108,7 +106,7 @@ header a:hover {
 }
 
 .container button:hover {
-    background-color: #353D60; 
+    background-color: #353D60; /* Fundo mais escuro ao passar o mouse */
     transform: translateY(-2px);
 }
 
@@ -118,12 +116,10 @@ header a:hover {
 
 /* Rodapé */
 footer {
-    background-color: #515A82; 
+    background-color: #515A82;
     color: #C6CAEB; /* Texto claro */
     text-align: center;
     padding: 20px 0;
-    position: relative;
-    bottom: 0;
     width: 100%;
     font-size: 0.9rem;
 }
@@ -145,6 +141,10 @@ footer a:hover {
         font-size: 2rem;
     }
 
+    .container {
+        padding: 30px 20px;
+    }
+
     .container h1 {
         font-size: 2.2rem;
     }
@@ -153,19 +153,16 @@ footer a:hover {
         font-size: 1rem;
     }
 
-    .container a {
-        font-size: 1rem;
-        padding: 8px 20px;
-    }
-
-    .container input[type="email"],
-    .container input[type="password"],
-    .container input[type="text"] {
+    .container input {
         padding: 10px;
         font-size: 1rem;
     }
 
     .container button {
         font-size: 1rem;
+    }
+
+    footer {
+        font-size: 0.8rem;
     }
 }

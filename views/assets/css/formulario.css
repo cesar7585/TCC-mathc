@@ -50,6 +50,24 @@ label {
     color: #353D60; /* Tom mais escuro da paleta */
 }
 
+/* Estilo dos campos de texto */
+input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #9AA0C8; /* Borda roxa clara */
+    border-radius: 8px;
+    background-color: #737BA5; /* Fundo roxo suave */
+    color: #EDE1F5; /* Cor clara para o texto dos inputs */
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+    border-color: #C6CAEB; /* Cor da borda mais clara ao focar */
+    outline: none; /* Remove o contorno padrão do navegador */
+}
+
 /* Botão de envio */
 button {
     background-color: #515A82; /* Tom escuro da paleta */
@@ -76,4 +94,17 @@ button:active {
 input[type="checkbox"]:focus {
     outline: none;
     border: 2px solid #737BA5; /* Adiciona um contorno leve para indicar foco */
+}
+
+/* Estilo dos campos checkbox dentro do fieldset */
+fieldset {
+    border: 2px solid #737BA5; /* Borda leve ao redor do campo de seleção */
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* Estilo geral do campo de texto e do formulário */
+input[type="text"], input[type="checkbox"] {
+    font-size: 1rem;
+    color: #353D60;
 }

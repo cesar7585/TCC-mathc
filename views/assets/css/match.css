@@ -1,0 +1,149 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F4F5FA; /* Fundo suave */
+    color: #333333; /* Cor do texto principal */
+    line-height: 1.6;
+    padding: 0;
+    margin: 0;
+}
+
+/* Cabeçalho */
+header {
+    background-color: #737BA5; /* Cor do cabeçalho */
+    color: #C6CAEB; /* Cor do texto */
+    text-align: center;
+    padding: 20px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+}
+
+/* Container principal */
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    background-color: #FFFFFF; /* Fundo branco para destacar conteúdo */
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: center;
+}
+
+/* Título principal */
+.container h1 {
+    color: #515A82; /* Cor elegante para títulos */
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+/* Link de adicionar projeto */
+.container a {
+    display: inline-block;
+    background-color: #737BA5; /* Fundo azul intermediário */
+    color: #FFFFFF;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.container a:hover {
+    background-color: #515A82; /* Cor mais escura no hover */
+}
+
+/* Lista de projetos */
+.container ul {
+    list-style: none;
+    margin: 20px 0;
+    padding: 0;
+}
+
+.container li {
+    background-color: #E3E6F3; /* Fundo leve para itens */
+    margin: 10px auto;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    text-align: left;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: #353D60;
+}
+
+.container li:nth-child(odd) {
+    background-color: #F0F1FA; /* Diferenciação visual em itens ímpares */
+}
+
+/* Título do projeto */
+.projeto-titulo {
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #353D60; /* Destaque */
+    margin: 0;
+}
+
+.projeto-titulo:hover {
+    color: #515A82; /* Alteração de cor no hover */
+}
+
+/* Descrição do projeto */
+.descricao {
+    display: none;
+    font-size: 1em;
+    color: #1D243D;
+    margin-top: 10px;
+}
+
+/* Texto de fallback (nenhum projeto) */
+.container p {
+    font-size: 1.2rem;
+    color: #515A82;
+    font-style: italic;
+    margin-top: 20px;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    .container h1 {
+        font-size: 2rem;
+    }
+
+    .container a {
+        font-size: 1rem;
+        padding: 8px 16px;
+    }
+
+    .container li {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container h1 {
+        font-size: 1.8rem;
+    }
+
+    .container a {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+}

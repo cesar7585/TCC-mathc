@@ -1,48 +1,52 @@
-
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php 
+include_once __DIR__ . '/../controllers/ProjetoController.php'; 
+include_once __DIR__ . '/../includes/db.php'; 
+?> 
+<link rel="icon" href="/../views/assets/images/logo.png" type="image/png">
     <title>CodeMatch</title>
     <link rel="stylesheet" href="views/assets/css/mostrarpj.css">
-</head>
+   
 <body>
-    <?php 
-
-var_dump(session_status());
-
-
-    var_dump($_SESSION['meusProjetos'])?>
-    <?php include_once __DIR__."/components/header.php" ?>
+    <?php include_once __DIR__ . "/components/header.php"; ?>
+    
     <h1>Seus Projetos</h1>
-    <ul>
-       <?php 
-       // Verifica se há projetos do usuário
-       if (!empty($projetos_user)){ 
-           foreach ($projetos_user as $projeto):               
-               echo htmlspecialchars($projeto['name']); 
-           endforeach; 
-       } else {
-           echo "Nenhum projeto encontrado."; // Corrigido o fechamento do echo
-       }
-       ?>
-    </ul>
+    
+    <div class="projeto-container">
+        <ul>
+            <?php 
+            if (!empty($_SESSION['meusProjetos'])) {
+                foreach ($_SESSION['meusProjetos'] as $index => $projeto) {
+                    echo '<li>';
+                    echo '<div class="projeto-titulo" onclick="mostrarDescricao(' . $index . ')">' 
+                        . htmlspecialchars($projeto['title']) 
+                        . '</div>';
+                    if (!empty($projeto['description'])) {
+                        echo '<div class="descricao" id="descricao-' . $index . '">'
+                            . htmlspecialchars($projeto['description']) 
+                            . '</div>';
+                    }
+                    echo '</li>';
+                }
+            } else {
+                echo '<li>Nenhum projeto encontrado.</li>';
+            }
+            ?>
+        </ul>
+    </div>
 
-    <h1>Projetos de outros usuários</h1>
-    <ul>
-        <?php if (!empty($projetos_terceiros)){
-            foreach ($projetos_terceiros as $projeto):
-                echo htmlspecialchars($projeto['name']);
-            endforeach;
-        }else{
-           echo "Nenhum projeto encontrado";
+    <a href="formulario" class="criar-projeto">Criar projeto</a>
+
+    <?php include_once __DIR__ . "/components/footer.php"; ?>
+
+    <script>
+        function mostrarDescricao(index) {
+            const descricao = document.getElementById('descricao-' + index);
+            if (descricao.style.display === 'none' || descricao.style.display === '') {
+                descricao.style.display = 'block'; 
+            } else {
+                descricao.style.display = 'none'; 
+            }
         }
-        ?>
-    </ul>
-
-    <a href="formulario">Criar projeto</a>
-
-    <?php include_once __DIR__."/components/footer.php";?> 
+    </script>
 </body>
 </html>

@@ -3,25 +3,27 @@ class db {
     protected $pdo;
 
     public function __construct() {
-        $servername = 'srv950.hstgr.io';
-        $username = 'u895973460_tcc';
-        $password = 'tcc-Cesar-Yasmin123';
-        $dbname = 'u895973460_Match';
+        $host = 'localhost';
+        $port = '3306';
+        $dbname = 'codematch';
+        $user = 'root';
+        $password = '';
 
         try {
-            // Establishing a PDO connection
-            $this->pdo = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
             
+            $this->pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $password);
+
+            // Configurando atributos do PDO
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
         } catch (PDOException $e) {
-            // Handle connection errors
-            die("Connection failed: " . $e->getMessage());
+            
+          
+            die("Erro ao conectar ao banco de dados.".$e->getmessage());
         }
     }
 
-    // A method to get the PDO instance
     public function getConnection() {
-
         return $this->pdo;
     }
 }

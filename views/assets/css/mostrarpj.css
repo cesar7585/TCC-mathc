@@ -18,6 +18,13 @@ h1 {
     letter-spacing: 1px; /* Leve espaçamento nas letras para um efeito mais sofisticado */
 }
 
+/* Container principal dos projetos */
+.projeto-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 15px;
+}
+
 /* Estilo das listas */
 ul {
     list-style-type: none; /* Remove os marcadores padrão */
@@ -38,22 +45,45 @@ li:hover {
     transform: translateY(-5px); /* Leve elevação ao passar o mouse */
 }
 
-/* Estilo do link */
-a {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 12px 18px;
-    background-color: #353D60; /* Cor mais escura para contraste */
-    color: #C6CAEB; /* Cor clara para o texto */
-    text-decoration: none;
-    border-radius: 8px; /* Bordas arredondadas */
+/* Título do projeto */
+.projeto-titulo {
+    cursor: pointer;
+    font-size: 1.2em;
     font-weight: bold;
-    transition: all 0.3s ease-in-out; /* Suavizar o efeito de hover */
+    color: #353D60; /* Destaque */
+    margin: 0;
 }
 
-a:hover {
-    background-color: #1D243D; /* Cor ainda mais escura no hover */
-    transform: translateY(-2px); /* Leve movimento para cima no hover */
+.projeto-titulo:hover {
+    color: #515A82; /* Alteração de cor no hover */
+}
+
+/* Descrição do projeto */
+.descricao {
+    display: none;
+    font-size: 1em;
+    color: #1D243D;
+    margin-top: 10px;
+}
+
+/* Link para criar projeto */
+.criar-projeto {
+    display: block;
+    text-align: center;
+    margin: 30px auto;
+    width: 200px;
+    padding: 12px 18px;
+    border-radius: 8px;
+    background-color: #515A82;
+    color: #C6CAEB;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+.criar-projeto:hover {
+    background-color: #353D60;
+    transform: translateY(-3px);
 }
 
 /* Botão */
@@ -71,5 +101,31 @@ a:hover {
 
 .button:hover {
     background-color: #353D60; /* Cor do botão ao passar o mouse */
+    transform: translateY(-2px); /* Leve movimento para cima no hover */
+}
+
+/* Footer ajustado */
+footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #515A82;
+    font-size: 0.9em;
+}
+
+/* Estilo do link */
+a {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 18px;
+    background-color: #353D60; /* Cor mais escura para contraste */
+    color: #C6CAEB; /* Cor clara para o texto */
+    text-decoration: none;
+    border-radius: 8px; /* Bordas arredondadas */
+    font-weight: bold;
+    transition: all 0.3s ease-in-out; /* Suavizar o efeito de hover */
+}
+
+a:hover {
+    background-color: #1D243D; /* Cor ainda mais escura no hover */
     transform: translateY(-2px); /* Leve movimento para cima no hover */
 }

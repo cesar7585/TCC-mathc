@@ -1,7 +1,8 @@
 <?php
+session_start();
 require_once __DIR__ . '/../routes/Router.php';
-require_once __DIR__ . '/../controllers/ProjetoController.php';
-require_once __DIR__.'/../controllers/Autenticacao.php';
+require_once __DIR__ . '/../controllers/Autenticacao.php';
+require_once __DIR__ . '/../includes/db.php';
 
 class ProjetoController
 {
@@ -9,58 +10,75 @@ class ProjetoController
 
     public function __construct()
     {
-        require_once __DIR__ . '/../includes/db.php';
+
         $db = new Db();
         $this->pdo = $db->getConnection();
     }
 
-    // Exibe todos os projetos
+
     public function todosProjetos()
     {
-        try {
-            $stmt = $this->pdo->prepare("SELECT * FROM projects WHERE users_id != ".$_SESSION['auth']['id']);
-            $stmt->execute();
+        //try {
+            $stmt = $this->pdo->query("SELECT * FROM projects WHERE users_id != ".$_SESSION['auth']['id']);
             $projects = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $_SESSION['outros_projetos'] = $projects;            
 
-            $projects=$_COOKIE['todosProjetos'];
-            header('outros_projetos');
-            return json_encode($projects, JSON_PRETTY_PRINT);
+       /*     
         } catch (PDOException $e) {
-            error_log("Erro ao buscar projetos: " . $e->getMessage());
+            
             return json_encode(["error" => "Erro ao buscar projetos."], JSON_PRETTY_PRINT);
         }
+            */
     }
-    public function meusProjetos(){
+    public function meusProjetos()
+    {
+        $query = null;
 
-        $query= $this->pdo->query("SELECT * FROM projects WHERE users_id =".$_SESSION['auth']['id']);
-        //$query->execute();
-       
-        $projects = $query->fetchAll(PDO::FETCH_ASSOC);
+        if (isset($_SESSION['auth'])) {
+            $auth = $_SESSION['auth'];
 
-        
-        $_SESSION['meusProjetos'] = $projects;
+            $query = $this->pdo->query("SELECT * FROM projects WHERE users_id = " . (int)$_SESSION['auth']['id']);
+        } else {
+            $auth = null;
+        }
 
-        (new Router())->redirecionar('meus_projetos');
-        
-        //header('/home');
+        if ($query) {
+            $projects = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
+            $_SESSION['meusProjetos'] = $projects;
+
+
+            return $projects;
+        }
+
+        return [];
     }
+
+
 
     // Cadastra um projeto
     public function cadastrar($dados)
-    { 
-        
+    {
+
+        if (!isset($_SESSION['auth'])) {
+            return json_encode(["error" => "Usuário não autenticado."], JSON_PRETTY_PRINT);
+        }
+
         try {
-            
-            
-            $stmt = $this->pdo->prepare("
-                INSERT INTO projects (title, description, languages, framework) 
-                VALUES (?, ?, ?, ?)");
-            $stmt->execute([$_SESSION['auth']['id'],$dados['title'], $dados['description'], $dados['languages'], $dados['framework']]);
+            $title = isset($dados['title']) ? $dados['title'] : null;
+            $description = isset($dados['description']) ? $dados['description'] : null;
+            $languages = isset($dados['languages']) ? implode(',', $dados['languages']) : null; // Converte o array em string
+            $framework = isset($dados['framework']) ? $dados['framework'] : null;
+
+            $stmt = $this->pdo->prepare("INSERT INTO projects (users_id, title, description, languages, framework) VALUES (?, ?, ?, ?, ?)");
+            $stmt->execute([$_SESSION['auth']['id'], $title, $description, $languages, $framework]);
+
 
             return json_encode(["message" => "Projeto cadastrado com sucesso"], JSON_PRETTY_PRINT);
         } catch (PDOException $e) {
             error_log("Erro ao cadastrar projeto: " . $e->getMessage());
-            return json_encode(["error" => "Erro ao cadastrar projeto.","message"=>$e->getMessage()], JSON_PRETTY_PRINT);
+            return json_encode(["error" => "Erro ao cadastrar projeto.", "message" => $e->getMessage()], JSON_PRETTY_PRINT);
         }
     }
 
@@ -85,7 +103,7 @@ class ProjetoController
 
     // Deleta um projeto
     public function destroy($id)
-    { 
+    {
         (new Autenticacao())->deslogar();
         try {
             $stmt = $this->pdo->prepare("DELETE FROM projects WHERE id = ?");
@@ -121,9 +139,7 @@ class ProjetoController
     public function update($id, $title, $description, $languages, $framework)
     {
         try {
-            $stmt = $this->pdo->prepare("
-                UPDATE projects 
-                SET title = ?, description = ?, languages = ?, framework = ? 
+            $stmt = $this->pdo->prepare("UPDATE projects SET title = ?, description = ?, languages = ?, framework = ? 
                 WHERE id = ?
             ");
             $stmt->execute([$title, $description, $languages, $framework, $id]);

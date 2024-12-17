@@ -154,7 +154,6 @@ footer a:hover {
     }
 
     .container {
-        max-width: 90%; /* Aumentando a largura do formulário para dispositivos móveis */
         padding: 25px;
     }
 
@@ -174,5 +173,16 @@ footer a:hover {
 
     .container button {
         font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container h1 {
+        font-size: 1.8rem;
+    }
+
+    .container a {
+        font-size: 0.9rem;
+        padding: 8px 12px;
     }
 }

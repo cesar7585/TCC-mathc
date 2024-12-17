@@ -1,144 +1,170 @@
-/* Estilo geral do corpo */
+/* Variáveis de Cores */
+:root {
+  --color-bg: #c6caeb; /* Cor de fundo */
+  --color-primary: #515a82; /* Cor principal */
+  --color-secondary: #737ba5; /* Cor secundária */
+  --color-highlight: #353d60; /* Texto em destaque */
+  --color-text: #353d60; /* Cor de texto principal */
+  --color-light: #ffffff; /* Branco */
+}
+
+/* Reset e Corpo */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: 'Segoe UI', Arial, sans-serif;
-    background-color: #C6CAEB; /* Cor de fundo suave */
-    margin: 0;
-    padding: 20px;
-    color: #353D60; /* Cor do texto principal */
+  font-family: "Segoe UI", Arial, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  line-height: 1.6;
 }
 
-/* Estilo do cabeçalho */
+/* Cabeçalho */
 header {
-    background-color: #515A82; /* Cor de fundo escura */
-    color: #F9F5FB; /* Cor clara para o texto */
-    padding: 30px;
+  background-color: var(--color-primary); /* Cor principal */
+  color: var(--color-light); /* Texto branco */
+  padding: 15px 30px; /* Espaçamento interno */
+  display: flex; /* Flexbox para alinhar os itens */
+  justify-content: space-between; /* Espaço entre logo e navegação */
+  align-items: center; /* Alinhamento vertical */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra leve */
+  border-radius: 0 0 10px 10px; /* Bordas arredondadas apenas na parte inferior */
+  position: sticky;
+  top: 0; /* Fixa o cabeçalho no topo */
+  z-index: 1000;
+}
+
+/* Logo */
+header .logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--color-light);
+  text-decoration: none;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+header .logo:hover {
+  color: var(--color-secondary); /* Cor secundária no hover */
+}
+
+/* Navegação */
+header nav ul {
+  list-style: none; /* Remove os pontos da lista */
+  display: flex; /* Alinha os itens horizontalmente */
+  gap: 20px; /* Espaço entre os itens */
+  margin: 0;
+  padding: 0;
+}
+
+header nav ul li a {
+  color: var(--color-light);
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+  color: var(--color-highlight); /* Cor de destaque */
+}
+
+/* Responsividade do Cabeçalho */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column; /* Muda para coluna em telas menores */
     text-align: center;
-    border-radius: 10px;
-    margin-bottom: 30px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  }
+
+  header nav ul {
+    flex-direction: column; /* Links ficam empilhados */
+    gap: 10px;
+  }
+
+  header .logo {
+    font-size: 1.5rem;
+  }
 }
 
-header h1 {
-    font-size: 2.8rem;
-    font-weight: 600;
-    letter-spacing: 1px;
+/* Caixa Central */
+.container {
+  background-color: var(--color-light);
+  max-width: 600px;
+  margin: 40px auto; /* Centraliza a caixa */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
 }
 
-/* Estilo dos títulos principais */
-h1 {
-    color: #353D60; /* Cor do título */
-    border-bottom: 4px solid #737BA5; /* Linha de separação sutil */
-    padding-bottom: 15px;
-    font-size: 2.5rem;
-    letter-spacing: 1px;
-    margin-bottom: 20px;
+.container h2 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: var(--color-highlight);
 }
 
-/* Estilo das listas */
-ul {
-    list-style-type: none;
-    padding: 0;
+.container p {
+  font-size: 1.1rem;
+  color: var(--color-text);
+  margin-bottom: 20px;
 }
 
-li {
-    background: #9AA0C8; /* Cor suave para os itens da lista */
-    margin: 20px 0;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(79, 59, 74, 0.1); /* Sombra suave */
-    transition: transform 0.3s ease, background-color 0.3s ease;
-}
-
-li:hover {
-    background-color: #737BA5; /* Cor do item no hover */
-    transform: translateY(-8px); /* Efeito de elevação */
-}
-
-/* Estilo de link */
-a {
-    display: inline-block;
-    padding: 12px 18px;
-    background-color: #737BA5;
-    color: #F9F5FB;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: 600;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-top: 20px;
-}
-
-a:hover {
-    background-color: #353D60;
-    transform: translateY(-4px); /* Efeito de elevação no hover */
-}
-
-/* Estilo do botão "Criar projeto" */
 .button {
-    display: inline-block;
-    padding: 15px 30px;
-    font-size: 18px;
-    color: #F9F5FB;
-    background-color: #515A82;
-    text-decoration: none;
-    border-radius: 8px;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    margin-top: 40px;
-    text-align: center;
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 1rem;
+  color: var(--color-light);
+  background-color: var(--color-primary);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .button:hover {
-    background-color: #353D60;
-    transform: translateY(-4px);
+  background-color: var(--color-secondary);
+  transform: translateY(-3px);
 }
 
-/* Estilo do rodapé */
+/* Rodapé */
 footer {
-    background-color: #515A82;
-    color: #F9F5FB;
-    text-align: center;
-    padding: 20px 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-    font-size: 1rem;
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  text-align: center;
+  padding: 10px;
+  margin-top: auto; /* Mantém o rodapé no final */
+  font-size: 0.9rem;
 }
 
 footer a {
-    color: #F9F5FB;
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
+  color: var(--color-light);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
 footer a:hover {
-    color: #C0A1D9; /* Cor de destaque no hover */
+  color: var(--color-highlight);
 }
 
-/* Estilos Responsivos */
+/* Responsividade */
 @media (max-width: 768px) {
-    header h1 {
-        font-size: 2.2rem;
-    }
+  .container {
+    margin: 20px;
+    padding: 20px;
+  }
 
-    .container h1 {
-        font-size: 2.2rem;
-    }
+  header h1 {
+    font-size: 2rem;
+  }
 
-    .container p {
-        font-size: 1rem;
-    }
-
-    .container a {
-        font-size: 1rem;
-        padding: 10px 25px;
-    }
-
-    footer {
-        padding: 20px 0;
-    }
-
-    .button {
-        width: 100%; /* Botão ocupa toda a largura em dispositivos pequenos */
-    }
+  .container h2 {
+    font-size: 1.5rem;
+  }
 }

@@ -48,19 +48,19 @@ class UserController
             }
 
             // Insere o usuário no banco de dados
-            var_dump($dados);
-            $stmt = $this->pdo->prepare("INSERT INTO users (name, email, password, image_url) VALUES (?, ?, ?, ?");
-            $stmt->execute([$dados['name'], $dados['email'], password_hash($dados['password'],PASSWORD_DEFAULT), $dados['image_url']]);
+          
+            $stmt = $this->pdo->prepare("INSERT INTO users (name, email, password, celular) VALUES (?, ?, ?, ?)");
+            $stmt->execute([$dados['name'], $dados['email'], password_hash($dados['password'],PASSWORD_DEFAULT),$dados['celular']]);
 
             // Login automático após cadastro
             $lastId = $this->pdo->lastInsertId();
-            Autenticacao::logar($lastId, $dados['name'], $dados['email'], $dados['password'], $dados['image_url'], null);
+            Autenticacao::logar($dados['email'], $dados['password'], $dados['celular']);
 
             return json_encode(["message" => "Usuário cadastrado com sucesso"], JSON_PRETTY_PRINT);
         } catch (PDOException $e) {
             error_log("Erro ao cadastrar usuário: " . $e->getMessage());
             return json_encode(["error" => "Erro ao cadastrar usuário."], JSON_PRETTY_PRINT);
-            var_dump($dados);
+           
         }
     }
 
